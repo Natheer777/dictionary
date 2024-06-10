@@ -13,7 +13,7 @@ export default function Search() {
 
   const handleSearch = () => {
     const data = JSON.stringify({ Page: 0, Term: searchQuery, Mode: 0 });
-    const proxyUrl = 'https://a-lokl.onrender.com/https://shinjikai.app/rpc/SearchWords';
+    const proxyUrl = 'http://localhost:3010/allWords';
 
     const config = {
       method: 'post',
@@ -33,14 +33,6 @@ export default function Search() {
           setSearchResults(jsonData.Items || []);
           setTotalResults(jsonData.TotalResults || 0);
           setTotalPages(jsonData.TotalPages || 0);
-
-          axios.post('http://localhost:3005/insertWords', { words: jsonData.Items })
-            .then((response) => {
-              console.log('Data inserted:', response.data);
-            })
-            .catch((error) => {
-              console.error('Error inserting data:', error);
-            });
         }
       })
       .catch((error) => {
@@ -76,75 +68,70 @@ export default function Search() {
   };
 
   return (
-    <>
-      <div className="App">
-        <div className="container mt-5">
-          <div className="SearchWord">
-            <input
-              type="text"
-              id="searchQuery"
-              name="searchQuery"
-              value={searchQuery}
-              placeholder="ادخل كلمة البحث هنا"
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-            <button id="searchButton" onClick={handleSearch}>بحث</button>
-            {/* <button id="clearButton" onClick={handleClear}>مسح</button> */}
-          </div>
-
-          <div className="search-info">
-            <div>عدد نتائج البحث: {totalResults}</div>
-            <div>عدد الصفحات: {totalPages}</div>
-            <div>الكلمة التي تم البحث عنها : {searchQuery}</div>
-          </div>
-
-          <Keyboard
-            layoutName="default"
-            onChange={onChange}
-            onKeyPress={handleKeyPress}
-            layout={{
-              default: [
-                'ض ص ث ق ف غ ع ه خ ح ج د',
-                'ش س ي ب ل ا ت ن م ك ط',
-                'ئ ء ؤ ر لا ى ة و ز ظ',
-                'ذ 1 2 3 4 5 6 7 8 9 0 {bksp}',
-                '{space}'
-              ]
-            }}
-            display={{
-              '{bksp}': 'حذف',
-              '{space}': 'مسافة'
-            }}
+    <div className="App">
+      <div className="container mt-5">
+        <div className="SearchWord">
+          <input
+            type="text"
+            id="searchQuery"
+            name="searchQuery"
+            value={searchQuery}
+            placeholder="ادخل كلمة البحث هنا"
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
+          <button id="searchButton" onClick={handleSearch}>بحث</button>
+        </div>
 
-          <table className="mt-5 mb-5">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Kana</th>
-                <th>Meaning Summary</th>
-                <th>Short Meaning Summary</th>
-              </tr>
-            </thead>
-            <tbody>
-              {searchResults.length === 0 ? (
-                <tr><td colSpan="4">لم يتم العثور على نتائج</td></tr>
-              ) : (
-                searchResults.map((item) => (
-                  <tr key={item.Id}>
-                    <td>{item.Id}</td>
-                    <td>{item.Kana}</td>
-                    <td>{item.MeaningSummary}</td>
-                    <td>{item.ShortMeaningSummary}</td>
+        <div className="search-info">
+          <div>عدد نتائج البحث: {totalResults}</div>
+          <div>عدد الصفحات: {totalPages}</div>
+          <div>الكلمة التي تم البحث عنها : {searchQuery}</div>
+        </div>
+
+        <Keyboard
+          layoutName="default"
+          onChange={onChange}
+          onKeyPress={handleKeyPress}
+          layout={{
+            default: [
+              'ض ص ث ق ف غ ع ه خ ح ج د',
+              'ش س ي ب ل ا ت ن م ك ط',
+              'ئ ء ؤ ر لا ى ة و ز ظ',
+              'ذ 1 2 3 4 5 6 7 8 9 0 {bksp}',
+              '{space}'
+            ]
+          }}
+          display={{
+            '{bksp}': 'حذف',
+            '{space}': 'مسافة'
+          }}
+        />
+
+        <table className="mt-5 mb-5">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Kana</th>
+              <th>Meaning Summary</th>
+              <th>Short Meaning Summary</th>
+            </tr>
+          </thead>
+          <tbody>
+            {searchResults.length === 0 ? (
+              <tr><td colSpan="4">لم يتم العثور على نتائج</td></tr>
+            ) : (
+              searchResults.map((item) => (
+                <tr key={item.id}>
+                  <td>{item.id}</td>
+                  <td>{item.kana}</td>
+                  <td>{item.meaning_summary}</td>
+                  <td>{item.short_meaning_summary}</td>
                 </tr>
               ))
             )}
           </tbody>
         </table>
-
-      
       </div>
-              </div>
-    </>
+    </div>
   );
 }

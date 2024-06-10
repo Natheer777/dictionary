@@ -1,11 +1,9 @@
 import { useState } from 'react';
 import './Contact.css';
-import { useTranslation } from 'react-i18next';
 import { FaFolderPlus, FaTrash } from 'react-icons/fa'; 
 
 
 export default function Contact() {
-  const [t] = useTranslation();
   const [attachedFile, setAttachedFile] = useState(null);
 
   const handleFileChange = (event) => {
