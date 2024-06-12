@@ -13,7 +13,7 @@ export default function Search() {
 
   const handleSearch = () => {
     const data = JSON.stringify({ Page: 0, Term: searchQuery, Mode: 0 });
-    const proxyUrl = 'http://localhost:3010/allWords';
+    const proxyUrl = 'https://dictionary-server-ytyo.onrender.com/allWords';
 
     const config = {
       method: 'post',
