@@ -136,7 +136,6 @@
 //   );
 // }
 
-
 import './Search.css';
 import { useState } from 'react';
 import Keyboard from 'react-simple-keyboard';
@@ -158,11 +157,11 @@ export default function Search() {
         const secondApiData = response.data;
         console.log('Second API Response Data:', secondApiData);
 
-        if (secondApiData) {
+        if (secondApiData && Array.isArray(secondApiData.Items)) {
           const filteredResults = secondApiData.Items.filter(item =>
-            item.kana.includes(searchQuery) ||
-            item.meaning_summary.includes(searchQuery) ||
-            item.short_meaning_summary.includes(searchQuery)
+            (item.kana && item.kana.includes(searchQuery)) ||
+            (item.meaning_summary && item.meaning_summary.includes(searchQuery)) ||
+            (item.short_meaning_summary && item.short_meaning_summary.includes(searchQuery))
           );
           setSecondApiResults(filteredResults);
           setSecondApiTotalResults(filteredResults.length);
@@ -177,8 +176,6 @@ export default function Search() {
         setSecondApiTotalPages(0);
       });
   };
-
-
 
   const onChange = (input) => {
     setKeyboardInput(input);
@@ -239,7 +236,7 @@ export default function Search() {
               <th>Kana</th>
               <th>Meaning Summary</th>
               <th>Short Meaning Summary</th>
-              <th>new</th>
+              <th>New</th>
             </tr>
           </thead>
           <tbody>
