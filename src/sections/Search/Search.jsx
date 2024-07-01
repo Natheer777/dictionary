@@ -150,8 +150,8 @@ export default function Search() {
   const [secondApiTotalPages, setSecondApiTotalPages] = useState(0);
 
   const handleSearch = () => {
-    // const secondApiUrl = 'https://dictionary-backend-zrxn.onrender.com/api/excel'; // عنوان الـ API الثاني
-    const secondApiUrl = "http://localhost:3010/api/excel"; // عنوان الـ API الثاني
+    const secondApiUrl = 'https://dictionary-backend-zrxn.onrender.com/api/excel'; // عنوان الـ API الثاني
+    // const secondApiUrl = "http://localhost:3010/api/excel"; // عنوان الـ API الثاني
 
     axios
       .post(secondApiUrl, { term: searchQuery })
