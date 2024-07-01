@@ -136,32 +136,37 @@
 //   );
 // }
 
-import './Search.css';
-import { useState } from 'react';
-import Keyboard from 'react-simple-keyboard';
-import 'react-simple-keyboard/build/css/index.css';
-import axios from 'axios';
+import "./Search.css";
+import { useState } from "react";
+import Keyboard from "react-simple-keyboard";
+import "react-simple-keyboard/build/css/index.css";
+import axios from "axios";
 
 export default function Search() {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [secondApiResults, setSecondApiResults] = useState([]);
-  const [keyboardInput, setKeyboardInput] = useState('');
+  const [keyboardInput, setKeyboardInput] = useState("");
   const [secondApiTotalResults, setSecondApiTotalResults] = useState(0);
   const [secondApiTotalPages, setSecondApiTotalPages] = useState(0);
 
   const handleSearch = () => {
-    const secondApiUrl = 'https://dictionary-backend-zrxn.onrender.com/api/excel'; // عنوان الـ API الثاني
+    // const secondApiUrl = 'https://dictionary-backend-zrxn.onrender.com/api/excel'; // عنوان الـ API الثاني
+    const secondApiUrl = "http://localhost:3010/api/excel"; // عنوان الـ API الثاني
 
-    axios.post(secondApiUrl, { term: searchQuery })
+    axios
+      .post(secondApiUrl, { term: searchQuery })
       .then((response) => {
         const secondApiData = response.data;
-        console.log('Second API Response Data:', secondApiData);
+        console.log("Second API Response Data:", secondApiData);
 
         if (secondApiData && Array.isArray(secondApiData.Items)) {
-          const filteredResults = secondApiData.Items.filter(item =>
-            (item.kana && item.kana.includes(searchQuery)) ||
-            (item.meaning_summary && item.meaning_summary.includes(searchQuery)) ||
-            (item.short_meaning_summary && item.short_meaning_summary.includes(searchQuery))
+          const filteredResults = secondApiData.Items.filter(
+            (item) =>
+              (item.kana && item.kana.includes(searchQuery)) ||
+              (item.meaning_summary &&
+                item.meaning_summary.includes(searchQuery)) ||
+              (item.short_meaning_summary &&
+                item.short_meaning_summary.includes(searchQuery))
           );
           setSecondApiResults(filteredResults);
           setSecondApiTotalResults(filteredResults.length);
@@ -170,7 +175,7 @@ export default function Search() {
         }
       })
       .catch((error) => {
-        console.error('Error fetching data from second API:', error);
+        console.error("Error fetching data from second API:", error);
         setSecondApiResults([]);
         setSecondApiTotalResults(0);
         setSecondApiTotalPages(0);
@@ -201,7 +206,9 @@ export default function Search() {
             placeholder="ادخل كلمة البحث هنا"
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-          <button id="searchButton" onClick={handleSearch}>بحث</button>
+          <button id="searchButton" onClick={handleSearch}>
+            بحث
+          </button>
         </div>
 
         <div className="search-info">
@@ -215,16 +222,16 @@ export default function Search() {
           onKeyPress={handleKeyPress}
           layout={{
             default: [
-              'ض ص ث ق ف غ ع ه خ ح ج د',
-              'ش س ي ب ل ا ت ن م ك ط',
-              'ئ ء ؤ ر لا ى ة و ز ظ',
-              'ذ 1 2 3 4 5 6 7 8 9 0 {bksp}',
-              '{space}'
-            ]
+              "ض ص ث ق ف غ ع ه خ ح ج د",
+              "ش س ي ب ل ا ت ن م ك ط",
+              "ئ ء ؤ ر لا ى ة و ز ظ",
+              "ذ 1 2 3 4 5 6 7 8 9 0 {bksp}",
+              "{space}",
+            ],
           }}
           display={{
-            '{bksp}': 'حذف',
-            '{space}': 'مسافة'
+            "{bksp}": "حذف",
+            "{space}": "مسافة",
           }}
         />
 
@@ -236,12 +243,34 @@ export default function Search() {
               <th>Kana</th>
               <th>Meaning Summary</th>
               <th>Short Meaning Summary</th>
-              <th>New</th>
+              <th>Writings</th>
+              <th>الكلمة</th>
+              <th>المعنى</th>
+              <th>النطق</th>
+              <th>التعريف</th>
+              <th>الأمثلة</th>
+              <th>التصنيف النحوي</th>
+              <th>الاشتقاقات و التصريفات</th>
+              <th>الملاحظات الثقافية</th>
+              <th>المصادر و المراجع</th>
+              <th>الأمثلة الصوتية</th>
+              <th>المرادف</th>
+              <th>العبارات الاصطلاحية</th>
+              <th>الاستعمالات الشائعة</th>
+              <th>الرمز و الأصل اللغوي</th>
+              <th>الصور</th>
+              <th>التعليمات و الملاحظات</th>
+              <th>الفئة</th>
+              <th>الأمثلة السياقية</th>
+              <th>الاختصارات</th>
+              <th>التنبيهات النحوية</th>
             </tr>
           </thead>
           <tbody>
             {secondApiResults.length === 0 ? (
-              <tr><td colSpan="5">لم يتم العثور على نتائج</td></tr>
+              <tr>
+                <td colSpan="5">لم يتم العثور على نتائج</td>
+              </tr>
             ) : (
               secondApiResults.map((item) => (
                 <tr key={item.id}>
@@ -249,7 +278,29 @@ export default function Search() {
                   <td>{item.kana}</td>
                   <td>{item.meaning_summary}</td>
                   <td>{item.short_meaning_summary}</td>
-                  <td>{item.new}</td>
+                  <td>
+                      {item.Writings}
+                    </td>
+                  <td>{item["الكلمة"]}</td>
+                  <td>{item["المعنى"]}</td>
+                  <td>{item["النطق"]}</td>
+                  <td>{item["التعريف"]}</td>
+                  <td>{item["الأمثلة"]}</td>
+                  <td>{item["التصنيف النحوي"]}</td>
+                  <td>{item["الاشتقاقات و التصريفات"]}</td>
+                  <td>{item["الملاحظات الثقافية"]}</td>
+                  <td>{item["المصادر و المراجع"]}</td>
+                  <td>{item["الأمثلة الصوتية"]}</td>
+                  <td>{item["المرادف"]}</td>
+                  <td>{item["العبارات الاصطلاحية"]}</td>
+                  <td>{item["الاستعمالات الشائعة"]}</td>
+                  <td>{item["الرمز و الأصل اللغوي"]}</td>
+                  <td>{item["الصور"]}</td>
+                  <td>{item["التعليمات و الملاحظات"]}</td>
+                  <td>{item["الفئة"]}</td>
+                  <td>{item["الأمثلة السياقية"]}</td>
+                  <td>{item["الاختصارات"]}</td>
+                  <td>{item["التنبيهات النحوية"]}</td>
                 </tr>
               ))
             )}
