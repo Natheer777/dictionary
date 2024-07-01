@@ -243,7 +243,7 @@ export default function Search() {
               <th>Kana</th>
               <th>Meaning Summary</th>
               <th>Short Meaning Summary</th>
-              <th>Writings</th>
+              <th>Kanji</th>
               <th>الكلمة</th>
               <th>المعنى</th>
               <th>النطق</th>
