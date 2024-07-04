@@ -151,7 +151,6 @@ export default function Search() {
 
   const handleSearch = () => {
     const secondApiUrl = 'https://dictionary-backend-zrxn.onrender.com/api/excel'; // عنوان الـ API الثاني
-    // const secondApiUrl = "http://localhost:3010/api/excel"; // عنوان الـ API الثاني
 
     axios
       .post(secondApiUrl, { term: searchQuery })
@@ -162,11 +161,11 @@ export default function Search() {
         if (secondApiData && Array.isArray(secondApiData.Items)) {
           const filteredResults = secondApiData.Items.filter(
             (item) =>
-              (item.kana && item.kana.includes(searchQuery)) ||
-              (item.meaning_summary &&
-                item.meaning_summary.includes(searchQuery)) ||
-              (item.short_meaning_summary &&
-                item.short_meaning_summary.includes(searchQuery))
+              (item["Words.Kana"] && item["Words.Kana"].includes(searchQuery)) ||
+              (item["Words.Meaning"] &&
+                item["Words.Meaning"].includes(searchQuery)) ||
+              (item["Words.Short"] &&
+                item["Words.Short"].includes(searchQuery))
           );
           setSecondApiResults(filteredResults);
           setSecondApiTotalResults(filteredResults.length);
@@ -234,8 +233,9 @@ export default function Search() {
             "{space}": "مسافة",
           }}
         />
-
         <h2>نتائج البحث</h2>
+        <div className="table-container">
+
         <table className="mt-5 mb-5">
           <thead>
             <tr>
@@ -269,18 +269,16 @@ export default function Search() {
           <tbody>
             {secondApiResults.length === 0 ? (
               <tr>
-                <td colSpan="5">لم يتم العثور على نتائج</td>
+                <td colSpan="25">لم يتم العثور على نتائج</td>
               </tr>
             ) : (
-              secondApiResults.map((item) => (
-                <tr key={item.id}>
-                  <td>{item.id}</td>
-                  <td>{item.kana}</td>
-                  <td>{item.meaning_summary}</td>
-                  <td>{item.short_meaning_summary}</td>
-                  <td>
-                      {item.Writings}
-                    </td>
+              secondApiResults.map((item, index) => (
+                <tr key={index}>
+                  <td>{item["Words.Id"]}</td>
+                  <td>{item["Words.Kana"]}</td>
+                  <td>{item["Words.Meaning"]}</td>
+                  <td>{item["Words.Short"]}</td>
+                  <td>{item["Words.Writings"]}</td>
                   <td>{item["الكلمة"]}</td>
                   <td>{item["المعنى"]}</td>
                   <td>{item["النطق"]}</td>
@@ -306,6 +304,7 @@ export default function Search() {
             )}
           </tbody>
         </table>
+                </div>
       </div>
     </div>
   );

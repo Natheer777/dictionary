@@ -54,12 +54,32 @@
     padding: 12px 8px;
     text-align: left;
     border-bottom: 1px solid #ddd;
-    display: inline-flex;
   }
   
   th {
     background-color: #f2f2f2;
   }
+  td {
+    padding: 12px 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    white-space: nowrap; /* جعل الخلية قابلة للتمدد */
+    width: 50%;
+  }
+  
+  
+  /* تخصيص للخلفية والحدود */
+  th, td {
+    background-color: #fff; /* خلفية الخلايا */
+    border: 1px solid #ddd; /* حدود الخلايا */
+  }
+  
+  /* جعل الجداول قابلة للتمرير */
+  .table-container {
+    max-height: 500px;
+    overflow-y: auto;
+  }
+  
   .search-info {
       display: flex;
       justify-content: space-around;
