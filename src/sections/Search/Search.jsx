@@ -12,44 +12,52 @@ export default function Search() {
   const [secondApiTotalPages, setSecondApiTotalPages] = useState(0);
 
   const handleSearch = () => {
-    const secondApiUrl =
-      "https://dictionary-backend-zrxn.onrender.com/api/excel"; // عنوان الـ API الثاني
+    const cleanedQuery = searchQuery.trim(); // إزالة الفراغات من بداية ونهاية النص
 
-    axios
-      .post(secondApiUrl, { term: searchQuery })
-      .then((response) => {
-        const secondApiData = response.data;
-        console.log("Second API Response Data:", secondApiData);
+    if (cleanedQuery) {
+      const secondApiUrl =
+        "https://dictionary-backend-zrxn.onrender.com/api/excel";
 
-        if (secondApiData && Array.isArray(secondApiData.Items)) {
-          const filteredResults = secondApiData.Items.filter(
-            (item) =>
-              (item["Words.Kana"] &&
-                item["Words.Kana"].includes(searchQuery)) ||
-              (item["Words.Meaning"] &&
-                item["Words.Meaning"].includes(searchQuery)) ||
-              (item["Words.Short"] && item["Words.Short"].includes(searchQuery))
-          );
+      axios
+        .post(secondApiUrl, { term: cleanedQuery })
+        .then((response) => {
+          const secondApiData = response.data;
+          console.log("Second API Response Data:", secondApiData);
 
-          // تعديل روابط الصور
-          filteredResults.forEach((item) => {
-            if (item.img && item.img.includes("drive.google.com/file/d/")) {
-              const fileId = item.img.split("/d/")[1].split("/")[0];
-              item.img = `https://drive.google.com/uc?export=download&id=${fileId}`;
-            }
-          });
+          if (secondApiData && Array.isArray(secondApiData.Items)) {
+            const filteredResults = secondApiData.Items.filter(
+              (item) =>
+                (item["Words.Kana"] &&
+                  item["Words.Kana"].includes(cleanedQuery)) ||
+                (item["Words.Meaning"] &&
+                  item["Words.Meaning"].includes(cleanedQuery)) ||
+                (item["Words.Short"] &&
+                  item["Words.Short"].includes(cleanedQuery))
+            );
 
-          setSecondApiResults(filteredResults);
-          setSecondApiTotalResults(filteredResults.length);
-          setSecondApiTotalPages(Math.ceil(filteredResults.length / 10));
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching data from second API:", error);
-        setSecondApiResults([]);
-        setSecondApiTotalResults(0);
-        setSecondApiTotalPages(0);
-      });
+            // تعديل روابط الصور
+            filteredResults.forEach((item) => {
+              if (
+                item.img &&
+                item.img.includes("drive.google.com/file/d/")
+              ) {
+                const fileId = item.img.split("/d/")[1].split("/")[0];
+                item.img = `https://drive.google.com/uc?export=download&id=${fileId}`;
+              }
+            });
+
+            setSecondApiResults(filteredResults);
+            setSecondApiTotalResults(filteredResults.length);
+            setSecondApiTotalPages(Math.ceil(filteredResults.length / 10));
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching data from second API:", error);
+          setSecondApiResults([]);
+          setSecondApiTotalResults(0);
+          setSecondApiTotalPages(0);
+        });
+    }
   };
 
   const onChange = (input) => {
@@ -75,6 +83,7 @@ export default function Search() {
             value={searchQuery}
             placeholder="ادخل كلمة البحث هنا"
             onChange={(e) => setSearchQuery(e.target.value)}
+          
           />
           <button id="searchButton" onClick={handleSearch}>
             بحث
