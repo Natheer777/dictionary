@@ -271,7 +271,7 @@ export default function Search() {
 
             setSecondApiResults(filteredResults);
             setSecondApiTotalResults(filteredResults.length);
-            setSecondApiTotalPages(Math.ceil(filteredResults.length / 10));
+            setSecondApiTotalPages(Math.ceil(filteredResults.length / filteredResults.length));
           }
         })
         .catch((error) => {
