@@ -485,9 +485,18 @@ export default function Search() {
                 item["الصور"].includes("drive.google.com/file/d/")
               ) {
                 const fileId = item["الصور"].split("/d/")[1].split("/")[0];
-                item["الصور"] = `https://drive.google.com/uc?export=download&id=${fileId}`;
+                item["الصور"] = `https://drive.google.com/thumbnail?id=${fileId}`;
               }
             });
+            // filteredResults.forEach((item) => {
+            //   if (
+            //     item["الأمثلة الصوتية"] &&
+            //     item["الأمثلة الصوتية"].includes("drive.google.com/file/d/")
+            //   ) {
+            //     const fileId = item["الأمثلة الصوتية"].split("/d/")[1].split("/")[0];
+            //     item["الأمثلة الصوتية"] = `https://drive.google.com/uc?id=${fileId}`;
+            //   }
+            // });
 
             setSecondApiResults(filteredResults);
             setSecondApiTotalResults(filteredResults.length);
@@ -632,7 +641,7 @@ export default function Search() {
                         <img
                           src={item["الصور"]}
                           alt="Search Result"
-                          style={{ width: "100px", height: "auto" }}
+                          style={{ width: "100px", height: "100px" }}
                         />
                       ) : (
                         "لا توجد صورة"
@@ -640,7 +649,7 @@ export default function Search() {
                     </td>
 
                     <td>{item["التعليمات و الملاحظات"]}</td>
-                    <td>{item["الفئة"]}</td>
+                    <td>{item["الفئة"] || "لم تحدد فئة بعد"}</td>
                     <td>{item["الأمثلة السياقية"]}</td>
                     <td>{item["الاختصارات"]}</td>
                     <td>{item["التنبيهات النحوية"]}</td>
@@ -651,6 +660,7 @@ export default function Search() {
           </table>
         </div>
       </div>
-    </div>
+      </div>
   );
 }
+4
