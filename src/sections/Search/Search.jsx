@@ -223,9 +223,8 @@
 // }
 
 
-
 import "./Search.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Keyboard from "react-simple-keyboard";
 import "react-simple-keyboard/build/css/index.css";
 import axios from "axios";
@@ -238,6 +237,12 @@ export default function Search() {
   const [secondApiTotalResults, setSecondApiTotalResults] = useState(0);
   const [secondApiTotalPages, setSecondApiTotalPages] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (searchQuery.trim() !== "") {
+      handleSearch();
+    }
+  }, [searchQuery]);
 
   const handleSearch = () => {
     const cleanedQuery = searchQuery.trim();
@@ -334,9 +339,6 @@ export default function Search() {
             placeholder="ادخل كلمة البحث هنا"
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-          <button id="searchButton" onClick={handleSearch}>
-            بحث
-          </button>
         </div>
 
         <div className="search-info">
@@ -387,16 +389,16 @@ export default function Search() {
                   {renderField("الاشتقاقات و التصريفات", item["الاشتقاقات و التصريفات"])}
                   {renderField("الملاحظات الثقافية", item["الملاحظات الثقافية"])}
                   {renderField("المصادر و المراجع", item["المصادر و المراجع"])}
-                  {renderField("الأمثلة الصوتية", item["الأمثلة الصوتية"] ) ? (
+                  {item["الأمثلة الصوتية"] ? (
                     <iframe src={item["الأمثلة الصوتية"]} width="100%" height="60" allow="autoplay"></iframe>
-                  ) : (
-                    null
-                  )}
+                  ) : null}
                   {renderField("المرادف", item["المرادف"])}
                   {renderField("العبارات الاصطلاحية", item["العبارات الاصطلاحية"])}
                   {renderField("الاستعمالات الشائعة", item["الاستعمالات الشائعة"])}
                   {renderField("الرمز و الأصل اللغوي", item["الرموز والأصل اللغوي"])}
-                  {renderField("الصور", <img src={item["الصور"]} alt="" />)}
+                  {item["الصور"] ? (
+                    <img src={item["الصور"]} alt="Search Result" style={{ width: "100px", height: "100px" }} />
+                  ) : null}
                   {renderField("التعليمات و الملاحظات", item["التعليمات و الملاحظات"])}
                   {renderField("الفئة", item["الفئة"])}
                   {renderField("الأمثلة السياقية", item["الأمثلة السياقية"])}
