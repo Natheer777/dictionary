@@ -41,7 +41,7 @@
     margin-top: 40px;
   }
   
-  table {
+  /* table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
@@ -63,18 +63,16 @@
     padding: 12px 8px;
     text-align: left;
     border-bottom: 1px solid #ddd;
-    white-space: nowrap; /* جعل الخلية قابلة للتمدد */
+    white-space: nowrap;
     width: 50%;
   }
   
   
-  /* تخصيص للخلفية والحدود */
   th, td {
-    background-color: #fff; /* خلفية الخلايا */
-    border: 1px solid #ddd; /* حدود الخلايا */
+    background-color: #fff; 
+    border: 1px solid #ddd; 
   }
-  
-  /* جعل الجداول قابلة للتمرير */
+
   .table-container {
     max-height: 500px;
     overflow-y: auto;
@@ -86,4 +84,40 @@
       padding: 3vh;
       flex-wrap: wrap-reverse;
       gap: 12px;
+  } */
+
+
+  .table-container {
+    padding: 20px;
   }
+  
+  .dictionary-entry {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .entry {
+    border: 1px solid #ddd;
+    padding: 16px;
+    background-color: #fff;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .field {
+    margin-bottom: 8px;
+  }
+  
+  .loading {
+    text-align: center;
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .no-results {
+    text-align: center;
+    font-size: 18px;
+    color: #999;
+  }
+  
