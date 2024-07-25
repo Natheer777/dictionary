@@ -390,15 +390,13 @@ export default function Search() {
                   {renderField("الملاحظات الثقافية", item["الملاحظات الثقافية"])}
                   {renderField("المصادر و المراجع", item["المصادر و المراجع"])}
                   {item["الأمثلة الصوتية"] ? (
-                    <iframe src={item["الأمثلة الصوتية"]} width="100%" height="60" allow="autoplay"></iframe>
+                    <iframe src={item["الأمثلة الصوتية"]} width="50%" height="60" allow="autoplay"></iframe>
                   ) : null}
                   {renderField("المرادف", item["المرادف"])}
                   {renderField("العبارات الاصطلاحية", item["العبارات الاصطلاحية"])}
                   {renderField("الاستعمالات الشائعة", item["الاستعمالات الشائعة"])}
                   {renderField("الرمز و الأصل اللغوي", item["الرموز والأصل اللغوي"])}
-                  {item["الصور"] ? (
-                    <img src={item["الصور"]} alt="Search Result" style={{ width: "100px", height: "100px" }} />
-                  ) : null}
+                  {renderField("الصور" , item["الصور"] ? (  <img src={item["الصور"]} alt="Search Result" style={{ width: "100px", height: "100px" }} /> ) : null)} 
                   {renderField("التعليمات و الملاحظات", item["التعليمات و الملاحظات"])}
                   {renderField("الفئة", item["الفئة"])}
                   {renderField("الأمثلة السياقية", item["الأمثلة السياقية"])}
