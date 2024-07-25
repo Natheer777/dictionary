@@ -96,8 +96,8 @@
   }
   
   .entry {
-    display: flex; /* استخدام flex */
-    flex-wrap: wrap; /* لتجنب تجاوز الحدود */
+    display: flex;
+    flex-direction: column; /* تغيير التخطيط ليكون عموديا */
     border: 1px solid #ddd;
     padding: 16px;
     background-color: #fff;
@@ -106,7 +106,6 @@
   }
   
   .field {
-    flex: 1 1 30%; /* عرض كل عنصر بنسبة 30% من العرض الكلي ويمكن أن يتمدد */
     margin-bottom: 8px;
     box-sizing: border-box; /* لضمان حساب الهوامش والحدود ضمن العرض */
     border: 1px solid #ddd; /* إضافة حدود لكل حقل */
