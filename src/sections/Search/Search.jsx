@@ -339,13 +339,14 @@ export default function Search() {
             placeholder="ادخل كلمة البحث هنا"
             onChange={(e) => setSearchQuery(e.target.value)}
           />
+          {isLoading && <span className="loading-text">...جار البحث</span>}
         </div>
-
+  
         <div className="search-info">
           <div>عدد نتائج البحث: {secondApiTotalResults}</div>
           <div>عدد الصفحات: {secondApiTotalPages}</div>
         </div>
-
+  
         <Keyboard
           layoutName="default"
           onChange={onChange}
@@ -364,11 +365,11 @@ export default function Search() {
             "{space}": "مسافة",
           }}
         />
-
+  
         <h2>نتائج البحث</h2>
-
+  
         {isLoading ? (
-          <div className="loading">...جار التحميل</div>
+          <div className="loading"></div>
         ) : (
           <div className="table-container">
             {secondApiResults.length === 0 ? (
@@ -410,4 +411,4 @@ export default function Search() {
       </div>
     </div>
   );
-}
+}  
