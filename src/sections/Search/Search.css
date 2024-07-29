@@ -106,13 +106,16 @@
   }
   
   .field {
+    direction: rtl;
     margin-bottom: 8px;
     box-sizing: border-box; /* لضمان حساب الهوامش والحدود ضمن العرض */
     border: 1px solid #ddd; /* إضافة حدود لكل حقل */
     padding: 8px; /* إضافة مسافة داخلية لجعل النص بعيداً عن الحدود */
     border-radius: 4px; /* إضافة زوايا مدورة للحدود */
   }
-  
+  .kana div{
+    direction: ltr !important;
+  }
   .loading {
     text-align: center;
     font-size: 18px;
