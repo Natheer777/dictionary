@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap');
+
+
+@font-face {
+  font-family: 'Zen Antique';
+  src: url('../src/Fonts/ZenAntiqueSoft-Regular.woff2') format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Noto Serif JP';
+  src: url('../src/Fonts/NotoSerifJP-Regular.woff2') format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Scheherazade New';
+  src: url('../src/Fonts/ScheherazadeNew-Bold.ttf') format('ttf');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Vollkorn SC';
+  src: url('../src/Fonts/Vollkorn-Regular.ttf') format('ttf');
+  font-display: swap;
+}
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body{
+  direction: rtl;
+}
+div#root{
+  background-color: aliceblue;
+  font-family: "Zen Antique", "Vollkorn SC", "Noto Serif JP", "Scheherazade New";
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  font-variation-settings:"slnt" 0;
+  list-style: none;
+}
+.left {
+  opacity: 0;
+  filter: blur(4px);
+  transform: translateX(-2%);
+  transition: all 1s;
+}
+.right {
+  opacity: 0;
+  filter: blur(4px);
+  transform: translateX(2%);
+  transition: all 1s;
+}
+.hidden {
+  opacity: 0;
+  filter: blur(4px);
+  transition: all 1s;
+}
+.top {
+  opacity: 0;
+  filter: blur(4px);
+  transform: translateY(30%);
+  transition: all 1s;
+}
+.show {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateX(0);
+} 
