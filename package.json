@@ -37,7 +37,8 @@
     "react-scripts": "^5.0.1",
     "react-simple-keyboard": "^3.7.152",
     "require": "^2.4.20",
-    "router-dom": "^2.2.11"
+    "router-dom": "^2.2.11",
+    "sitemap": "^8.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.3.5",

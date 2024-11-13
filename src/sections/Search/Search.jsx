@@ -11,7 +11,7 @@ export default function Search() {
   const [secondApiResults, setSecondApiResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const api = axios.create({
-    baseURL: 'https://api.ajls.online'
+    baseURL: 'https://api.alpt.org'
   });
   useEffect(() => {
     api
@@ -185,7 +185,7 @@ export default function Search() {
         });
   
       // Fetch results from the second API
-      const secondApiUrl = "https://api.ajls.online/api/excel";
+      const secondApiUrl = "https://api.alpt.org/api/excel";
       const secondApiPromise = axios
         .post(secondApiUrl, { term: encryptedQuery }) // Send encrypted query
         .then((response) => {

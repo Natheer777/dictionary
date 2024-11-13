@@ -32,7 +32,7 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route path="/dictionary/" element={<Home />} />
+          <Route path="/" element={<Home />} />
         </Routes>
       </Router>
     </>
