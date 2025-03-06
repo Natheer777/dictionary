@@ -6,7 +6,7 @@ export default function Home() {
     <Navbar />
     <Search />
     <About />
-    <Contact />
+    {/* <Contact /> */}
     <Footer />
     </>
   )
