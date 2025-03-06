@@ -265,6 +265,7 @@ export default function Search() {
               .then(() => {
                 console.log("تم إرسال الاقتراح:", cleanedQuery);
               })
+              
               .catch((err) => {
                 console.error("حدث خطأ عند إرسال الاقتراح:", err);
               });
